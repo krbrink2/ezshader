@@ -10,101 +10,9 @@
 GLfloat angle;
 GLfloat elevation;
 GLfloat distance;
-// Shader stuff
-GLuint vshader, fshader, program;
 // Model stuff
 GLfloat scalar = .01;
 GLfloat ytrans = 0;
-
-void makeShader(){
-	GLint compiled, linked;
-	const GLchar* vShaderSrc[] = {
-		"#version 130\n"
-		"out vec4 worldPoint;\n"
-		"out vec4 normal;\n"
-		"void main()\n"
-		"{\n"
-		"	gl_Position = gl_ModelViewProjectionMatrix*gl_Vertex;\n"
-		"	worldPoint	= gl_ModelViewProjectionMatrix*gl_Vertex;\n"
-		"	normal = vec4(normalize(gl_NormalMatrix * gl_Normal), 1);\n"
-		//"	gl_BackColor = gl_Vertex;"
-		//"	gl_FrontColor = gl_Vertex;"
-		"}\n"
-		/*"#version 130"
-		"uniform float t;" // Time (passed in from the application)
-		"attribute vec4 vel; // Particle velocity"
-		"const vec4 g = vec4( 0.0, -9.80, 0.0 );"
-		"void main()"
-		"{"
-		"	vec4 position = gl_Vertex;"
-		"	position += t*vel + t*t*g;"
-		"	gl_Position = gl_ModelViewProjectionMatrix * position;"
-		"}"*/
-	};
-	const GLchar* fShadersrc[] = {
-		"#version 130\n"
-		"in vec4 worldPoint;\n"
-		"in vec4 normal;\n"
-		"out vec4 FragColor;\n"
-		"void main(void)\n"
-		"{\n"
-			"vec4 light = normalize(gl_LightSource[0].position - worldPoint);\n"
-			"vec4 foo 	= gl_FrontLightProduct[0].diffuse * max(dot(light,normal), 0);\n"
-			"foo = clamp(foo, 0, 1);\n"
-			"\n"
-			"FragColor = foo;\n"
-			//"FragColor = vec4(.15, .5, worldPoint.z, 1);\n"
-			//"gl_FragColor = clamp(gl_FragCoord, 0.0, 1.0);"
-		"}\n"
-	};
-
-	vshader = glCreateShader(GL_VERTEX_SHADER);					// Create shader object
-	fshader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(vshader, 1, vShaderSrc, NULL);					// Attach source code
-	glShaderSource(fshader, 1, fShadersrc, NULL);
-	glCompileShader(vshader);									// Compile
-	glGetShaderiv(vshader, GL_COMPILE_STATUS, &compiled );		// Check if compilation successful
-	if(!compiled){
-		GLint length;
-		GLchar* log;
-		glGetShaderiv(vshader, GL_INFO_LOG_LENGTH, &length );
-		log = (GLchar*) malloc(length);
-		glGetShaderInfoLog(vshader, length, &length, log);
-		fprintf(stderr, "~~ Vertex compile log:\n‘%s’\n", log);
-		free(log);
-		return;
-	}
-	glCompileShader(fshader);
-	glGetShaderiv(fshader, GL_COMPILE_STATUS, &compiled );
-	if(!compiled){
-		GLint length;
-		GLchar* log;
-		glGetShaderiv(fshader, GL_INFO_LOG_LENGTH, &length );
-		log = (GLchar*) malloc(length);
-		glGetShaderInfoLog(fshader, length, &length, log);
-		fprintf(stderr, "~~ Fragment compile log:\n‘%s’\n", log);
-		free(log);
-		return;
-	}
-	program = glCreateProgram();								// Create program object
-	glAttachShader(program, vshader);							// Attatch shader
-	glAttachShader(program, fshader);
-	glLinkProgram(program);										// Link all shaders
-	glGetProgramiv(program, GL_LINK_STATUS, &linked );			// Check if linked
-	if(linked){
-		glUseProgram(program);
-	}
-	else{
-		GLint length;
-		GLchar* log;
-		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length );
-		log = (GLchar*) malloc(length);
-		glGetProgramInfoLog(program, length, &length, log);
-		fprintf(stderr, "link log = ‘%s’\n", log);
-		free(log);
-		return;
-	}
-}
 
 void init(){
 	int maj, min;
@@ -116,7 +24,6 @@ void init(){
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(.2, .2, .2, 0);
 
-	//makeShader();
 	FILE *vf, *ff;
 	vf = fopen("vertexShader.vert", "r");
 	ff = fopen("fragmentShader.frag", "r");
@@ -131,8 +38,8 @@ void init(){
 	fclose(vf);
 	fclose(ff);
 	
-	distance = 15;
-	elevation = 0;
+	distance = 8;
+	elevation = 4;
 }
 
 void display(){
@@ -141,8 +48,8 @@ void display(){
 	gluLookAt(distance*sin(angle), elevation, distance*cos(angle), 0, 1, 0, 0, 1, 0);
 
 	// Lights
-	GLfloat lightAmb[] = {.5*255/255, .5*229/255, .5*180/255};
-	GLfloat lightDiff[] = {(float)255/255, (float)229/255, (float)180/255};
+	GLfloat lightAmb[] = {1.0, 1.0, 1.0};//{.5*255/255, .5*229/255, .5*180/255};
+	GLfloat lightDiff[] = {1.0, 1.0, 1.0};//{(float)255/255, (float)229/255, (float)180/255};
 	GLfloat lightSpec[] = {1.0, 1.0, 1.0};
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmb);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiff);
@@ -152,6 +59,16 @@ void display(){
 	glEnable(GL_LIGHT0);
 	glEnable(GL_LIGHTING);
 	glColor3f(1., 0., 0.);
+
+	// Material
+	GLfloat matamb[] = {.1, .1, .1, 1.0};
+	GLfloat matdiff[] = {.4, .4, .4, 1.0};
+	GLfloat matspec[] = {1, 1, 1, 1.0};
+	//GLfloat matspec[] = {.01, .01, .01, 1.0};
+	glMaterialfv(GL_FRONT, GL_AMBIENT, matamb);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, matdiff);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, matspec);
+	glMaterialf(GL_FRONT, GL_SHININESS, 50);
 
 	// Teapot
 	glPushMatrix();
