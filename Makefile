@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -Wall -Werror -lm -lSOIL -lGLEW -lGL -lGLU -lglut
-TARGET = shaderTest
+TARGET = shaderLoaderTest
 
 default: $(TARGET)
 
