@@ -249,7 +249,7 @@ void display(){
 		glTranslatef(0., 0, -1.26);
 		glScalef(10., 20., 0.);
 		glBegin(GL_QUADS);
-			glNormal3f(0, 0, -1);
+			glNormal3f(0, 0, 1);
 			glTexCoord2f(0., 0.);
 			glVertex3f(-1, 0, 0);
 			glTexCoord2f(0., 1.);
