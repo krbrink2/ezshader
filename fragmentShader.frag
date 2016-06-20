@@ -18,11 +18,11 @@ void main(void)
 
 	vec4 specular	= gl_FrontLightProduct[0].specular * pow( max( dot(vec3(halfVect), vec3(normal)), 0), gl_FrontMaterial.shininess);
 
-	vec4 totalColor	= min(diffuse + specular + ambient, 1);
+	vec4 totalColor	= min(diffuse + specular*0 + ambient, 1);
 
+	// Cartoon shader
 	float foo = dot(halfVect, normal);
 	float scalar;
-
 	if(foo > 0.95){
 		scalar = 1;
 	}
@@ -36,7 +36,8 @@ void main(void)
 		scalar = 0;
 	}
 	FragColor = scalar*vec4(1, 0, 0, 1);
-
+	
+	FragColor = totalColor;
 
 	//FragColor = vec4(.15, .5, modelCoord.z, 1);
 	//gl_FragColor = clamp(gl_FragCoord, 0.0, 1.0);

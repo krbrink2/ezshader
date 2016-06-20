@@ -16,6 +16,39 @@ GLfloat angle;
 GLfloat elevation;
 GLfloat distance;
 
+// Draws square with texture, in the xy plane
+void ezsquare(GLfloat width, GLint subdivs){
+	GLfloat unitWidth = width/subdivs;
+	GLfloat texUnitWidth = (GLfloat)1/subdivs;
+	glNormal3f(0, 0, 1);
+	int i, j;
+	for(i = 0; i < subdivs; i++){
+		GLfloat y = width - i*unitWidth;
+		GLfloat texy = 1 - i*texUnitWidth;
+		for(j = 0; j < subdivs; j++){
+			GLfloat x = -width/2 + j*unitWidth;
+			GLfloat texx = j*texUnitWidth;
+			// (x,y) describe top-left corner
+			glBegin(GL_QUADS);
+				// Bottom Left
+				glTexCoord2f(texx, texy-texUnitWidth);
+				glVertex3f(x, y+unitWidth, 0);
+				// Bottom Right
+				glTexCoord2f(texx+texUnitWidth, texy-texUnitWidth);
+				glVertex3f(x+unitWidth, y+unitWidth, 0);
+				// Top right
+				glTexCoord2f(texx+texUnitWidth, texy);
+				glVertex3f(x+unitWidth, y, 0);
+				// Top left
+				//glNormal3f((GLfloat)rand()/RAND_MAX, (GLfloat)rand()/RAND_MAX, ((GLfloat)rand()/RAND_MAX));
+				glTexCoord2f(texx, texy);
+				glVertex3f(x, y, 0);
+			glEnd();
+		}
+	}
+
+}
+
 void init(){
 	glEnable(GL_NORMALIZE);
 	glShadeModel(GL_SMOOTH);
@@ -113,7 +146,7 @@ void display(){
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmb);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiff);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, lightSpec);
-	GLfloat light0Pos[] = {-100.0, 100.0, 100.0, 1.0};	// Ceiling
+	GLfloat light0Pos[] = {-100.0*0, 100.0, 100.0, 1.0};	// Ceiling
 	glLightfv(GL_LIGHT0, GL_POSITION, light0Pos);
 	glEnable(GL_LIGHT0);
 	glLightfv(GL_LIGHT1, GL_AMBIENT, lightAmb);
@@ -234,9 +267,9 @@ void display(){
 
 
 	// Wall
-	GLfloat wallMatAmb[] = {.0, .0, .0, 1.f};
+	GLfloat wallMatAmb[] = {.1, .1, .1, 1.f};
 	GLfloat wallMatDiff[] = {.9, .9, .9, 1.f};
-	GLfloat wallMatSpec[] = {.1, .1, .1, 1.f};
+	GLfloat wallMatSpec[] = {1, 1, 1, 1.f};
 	glMaterialfv(GL_FRONT, GL_AMBIENT, wallMatAmb);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, wallMatDiff);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, wallMatSpec);
@@ -248,17 +281,18 @@ void display(){
 	glPushMatrix();
 		glTranslatef(0., 0, -1.26);
 		glScalef(10., 20., 0.);
-		glBegin(GL_QUADS);
-			glNormal3f(0, 0, 1);
-			glTexCoord2f(0., 0.);
-			glVertex3f(-1, 0, 0);
-			glTexCoord2f(0., 1.);
-			glVertex3f(-1, 1, 0);
-			glTexCoord2f(1., 1.);
-			glVertex3f(1, 1, 0);
-			glTexCoord2f(1., 0.);
-			glVertex3f(1, 0, 0);
-		glEnd();
+		ezsquare(2, 10);
+		// glBegin(GL_QUADS);
+		// 	glNormal3f(0, 0, 1);
+		// 	glTexCoord2f(0., 0.);
+		// 	glVertex3f(-1, 0, 0);
+		// 	glTexCoord2f(0., 1.);
+		// 	glVertex3f(-1, 1, 0);
+		// 	glTexCoord2f(1., 1.);
+		// 	glVertex3f(1, 1, 0);
+		// 	glTexCoord2f(1., 0.);
+		// 	glVertex3f(1, 0, 0);
+		// glEnd();
 	glPopMatrix();
 
 	// Floor
