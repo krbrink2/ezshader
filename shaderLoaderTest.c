@@ -16,7 +16,10 @@ GLfloat angle;
 GLfloat elevation;
 GLfloat distance;
 
-// Draws square with texture, in the xy plane
+/*	Draws tesselated square in the (x,y) plane.
+	subdivs: number of tesselations in each dimension
+	width: width and length of the square
+*/
 void ezsquare(GLfloat width, GLint subdivs){
 	GLfloat unitWidth = width/subdivs;
 	GLfloat texUnitWidth = (GLfloat)1/subdivs;
@@ -32,10 +35,10 @@ void ezsquare(GLfloat width, GLint subdivs){
 			glBegin(GL_QUADS);
 				// Bottom Left
 				glTexCoord2f(texx, texy-texUnitWidth);
-				glVertex3f(x, y+unitWidth, 0);
+				glVertex3f(x, y-unitWidth, 0);
 				// Bottom Right
 				glTexCoord2f(texx+texUnitWidth, texy-texUnitWidth);
-				glVertex3f(x+unitWidth, y+unitWidth, 0);
+				glVertex3f(x+unitWidth, y-unitWidth, 0);
 				// Top right
 				glTexCoord2f(texx+texUnitWidth, texy);
 				glVertex3f(x+unitWidth, y, 0);
@@ -279,8 +282,8 @@ void display(){
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glPushMatrix();
-		glTranslatef(0., 0, -1.26);
-		glScalef(10., 20., 0.);
+		glTranslatef(0., -.5, -1.26);
+		glScalef(10., 10., 0.);
 		ezsquare(2, 10);
 		// glBegin(GL_QUADS);
 		// 	glNormal3f(0, 0, 1);
