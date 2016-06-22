@@ -23,7 +23,6 @@ GLfloat distance;
 void ezsquare(GLfloat width, GLint subdivs){
 	GLfloat unitWidth = width/subdivs;
 	GLfloat texUnitWidth = (GLfloat)1/subdivs;
-	glNormal3f(0, 0, 1);
 	int i, j;
 	for(i = 0; i < subdivs; i++){
 		GLfloat y = width - i*unitWidth;
@@ -33,16 +32,21 @@ void ezsquare(GLfloat width, GLint subdivs){
 			GLfloat texx = j*texUnitWidth;
 			// (x,y) describe top-left corner
 			glBegin(GL_QUADS);
+				glNormal3f(0, 0, 1);
 				// Bottom Left
+				glNormal3f(0, 0, 1);
 				glTexCoord2f(texx, texy-texUnitWidth);
 				glVertex3f(x, y-unitWidth, 0);
 				// Bottom Right
+				glNormal3f(0, 0, 1);
 				glTexCoord2f(texx+texUnitWidth, texy-texUnitWidth);
 				glVertex3f(x+unitWidth, y-unitWidth, 0);
 				// Top right
+				glNormal3f(0, 0, 1);
 				glTexCoord2f(texx+texUnitWidth, texy);
 				glVertex3f(x+unitWidth, y, 0);
 				// Top left
+				glNormal3f(0, 0, 1);
 				//glNormal3f((GLfloat)rand()/RAND_MAX, (GLfloat)rand()/RAND_MAX, ((GLfloat)rand()/RAND_MAX));
 				glTexCoord2f(texx, texy);
 				glVertex3f(x, y, 0);
@@ -123,10 +127,10 @@ void init(){
 		printf("Can't open file!\n");
 		exit(1);
 	}
-	if(ezMakeShader(vf, ff)){
-		printf("Error loading shader!\n");
-		exit(1);
-	}
+	// if(ezMakeShader(vf, ff)){
+	// 	printf("Error loading shader!\n");
+	// 	exit(1);
+	// }
 	fclose(vf);
 	fclose(ff);
 
@@ -138,12 +142,14 @@ void init(){
 void display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
-	gluLookAt(distance*sin(angle), elevation, distance*cos(angle), 0, 7, 0, 0, 1, 0);
+	gluLookAt(distance*sin(angle), elevation, distance*cos(angle), 0, 7*0, 0, 0, 1, 0);
 	glEnable(GL_LIGHTING);
 
 	// Lights
-	GLfloat lightAmb[] = {.5*255/255, .5*229/255, .5*180/255};
-	GLfloat lightDiff[] = {(float)255/255, (float)229/255, (float)180/255};
+	// GLfloat lightAmb[] = {.5*255/255, .5*229/255, .5*180/255};
+	// GLfloat lightDiff[] = {(float)255/255, (float)229/255, (float)180/255};
+	GLfloat lightAmb[] = {.5, .5, .5};
+	GLfloat lightDiff[] = {.8, .8, .8};
 	GLfloat lightSpec[] = {1.0, 1.0, 1.0};
 	//GLfloat light0Pos[] = {10*sin(angle/30), 10*cos(angle/30), 10};
 	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmb);
@@ -271,7 +277,7 @@ void display(){
 
 	// Wall
 	GLfloat wallMatAmb[] = {.1, .1, .1, 1.f};
-	GLfloat wallMatDiff[] = {.9, .9, .9, 1.f};
+	GLfloat wallMatDiff[] = {1, 1, 1, 1.f};
 	GLfloat wallMatSpec[] = {1, 1, 1, 1.f};
 	glMaterialfv(GL_FRONT, GL_AMBIENT, wallMatAmb);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, wallMatDiff);
@@ -282,8 +288,8 @@ void display(){
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glPushMatrix();
-		glTranslatef(0., -.5, -1.26);
-		glScalef(10., 10., 0.);
+		// glTranslatef(0., -.5, -1.26);
+		// glScalef(10., 10., 0.);
 		ezsquare(2, 10);
 		// glBegin(GL_QUADS);
 		// 	glNormal3f(0, 0, 1);
@@ -327,7 +333,7 @@ void display(){
 	glutSwapBuffers();
 	glFlush();
 	glutPostRedisplay();
-	glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_TEXTURE_2D);
 }
 
 void reshape(int w, int h){
