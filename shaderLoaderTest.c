@@ -127,10 +127,10 @@ void init(){
 		printf("Can't open file!\n");
 		exit(1);
 	}
-	// if(ezMakeShader(vf, ff)){
-	// 	printf("Error loading shader!\n");
-	// 	exit(1);
-	// }
+	if(ezMakeShader(vf, ff)){
+		printf("Error loading shader!\n");
+		exit(1);
+	}
 	fclose(vf);
 	fclose(ff);
 
@@ -142,7 +142,7 @@ void init(){
 void display(){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
-	gluLookAt(distance*sin(angle), elevation, distance*cos(angle), 0, 7*0, 0, 0, 1, 0);
+	gluLookAt(distance*sin(angle), elevation, distance*cos(angle), 0, 7, 0, 0, 1, 0);
 	glEnable(GL_LIGHTING);
 
 	// Lights
@@ -288,20 +288,8 @@ void display(){
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glPushMatrix();
-		// glTranslatef(0., -.5, -1.26);
-		// glScalef(10., 10., 0.);
-		ezsquare(2, 10);
-		// glBegin(GL_QUADS);
-		// 	glNormal3f(0, 0, 1);
-		// 	glTexCoord2f(0., 0.);
-		// 	glVertex3f(-1, 0, 0);
-		// 	glTexCoord2f(0., 1.);
-		// 	glVertex3f(-1, 1, 0);
-		// 	glTexCoord2f(1., 1.);
-		// 	glVertex3f(1, 1, 0);
-		// 	glTexCoord2f(1., 0.);
-		// 	glVertex3f(1, 0, 0);
-		// glEnd();
+		glTranslatef(0., -.5, -1.26);
+		ezsquare(20, 10);
 	glPopMatrix();
 
 	// Floor

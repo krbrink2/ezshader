@@ -21,7 +21,7 @@ void main(void)
 
 	vec4 specular	= gl_FrontLightProduct[0].specular * pow( max( dot(vec3(halfVect), vec3(normal)), 0), gl_FrontMaterial.shininess);
 
-	vec4 totalColor	= min(ambient*0 + diffuse + specular*0, 1);
+	vec4 totalColor	= min(ambient + diffuse + specular, 1);
 
 	// Cartoon shader
 	float foo = dot(halfVect, normal);
