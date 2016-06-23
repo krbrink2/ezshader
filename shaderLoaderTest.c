@@ -146,22 +146,24 @@ void display(){
 	glEnable(GL_LIGHTING);
 
 	// Lights
-	// GLfloat lightAmb[] = {.5*255/255, .5*229/255, .5*180/255};
-	// GLfloat lightDiff[] = {(float)255/255, (float)229/255, (float)180/255};
-	GLfloat lightAmb[] = {.5, .5, .5};
-	GLfloat lightDiff[] = {.8, .8, .8};
-	GLfloat lightSpec[] = {1.0, 1.0, 1.0};
-	//GLfloat light0Pos[] = {10*sin(angle/30), 10*cos(angle/30), 10};
-	glLightfv(GL_LIGHT0, GL_AMBIENT, lightAmb);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiff);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, lightSpec);
-	GLfloat light0Pos[] = {-100.0*0, 100.0, 100.0, 1.0};	// Ceiling
+	// Light 0: distance
+	GLfloat light0Amb[] = {.5, .5, .5};
+	GLfloat light0Diff[] = {.8, .8, .8};
+	GLfloat light0Spec[] = {.8, .8, .8};
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light0Amb);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light0Diff);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light0Spec);
+	GLfloat light0Pos[] = {-100.0*0, 100.0, 100.0, 1.0};
 	glLightfv(GL_LIGHT0, GL_POSITION, light0Pos);
 	glEnable(GL_LIGHT0);
-	glLightfv(GL_LIGHT1, GL_AMBIENT, lightAmb);
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightDiff);
-	glLightfv(GL_LIGHT1, GL_SPECULAR, lightSpec);
-	GLfloat light1Pos[] = {0.0, 9.0, 1.0, 1.0};	// Lamp light
+	// Light 1: lamp
+	GLfloat light1Amb[] = {0, 0, 0};
+	GLfloat light1Diff[] = {1, .22, .05};
+	GLfloat light1Spec[] = {0, 0, 0};
+	glLightfv(GL_LIGHT1, GL_AMBIENT, light1Amb);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
+	GLfloat light1Pos[] = {0.0, 9.0, 1.0, 1.0};
 	glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
 	glEnable(GL_LIGHT1);
 
@@ -276,9 +278,9 @@ void display(){
 
 
 	// Wall
-	GLfloat wallMatAmb[] = {.1, .1, .1, 1.f};
-	GLfloat wallMatDiff[] = {1, 1, 1, 1.f};
-	GLfloat wallMatSpec[] = {1, 1, 1, 1.f};
+	GLfloat wallMatAmb[] = {.05, .05, .05, 1.f};
+	GLfloat wallMatDiff[] = {.5, .5, .5, 1.f};
+	GLfloat wallMatSpec[] = {.4, .4, .4, 1.f};
 	glMaterialfv(GL_FRONT, GL_AMBIENT, wallMatAmb);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, wallMatDiff);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, wallMatSpec);
