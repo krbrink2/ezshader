@@ -17,8 +17,8 @@ GLfloat elevation;
 GLfloat distance;
 
 /*	Draws tesselated square in the (x,y) plane.
-	subdivs: number of tesselations in each dimension
-	width: width and length of the square
+	@subdivs: number of tesselations in each dimension
+	@width: width and length of the square
 */
 void ezsquare(GLfloat width, GLint subdivs){
 	GLfloat unitWidth = width/subdivs;
@@ -148,8 +148,8 @@ void display(){
 	// Lights
 	// Light 0: distance
 	GLfloat light0Amb[] = {.5, .5, .5};
-	GLfloat light0Diff[] = {.8, .8, .8};
-	GLfloat light0Spec[] = {.8, .8, .8};
+	GLfloat light0Diff[] = {.5, .5, .5};
+	GLfloat light0Spec[] = {.5, .5, .5};
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light0Amb);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light0Diff);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light0Spec);
@@ -305,25 +305,14 @@ void display(){
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glBindTexture(GL_TEXTURE_2D, texNames[4]);
 	glPushMatrix();
-		glRotatef(90, 1, 0, 0);
-		glScalef(10., 10., 10.);
-		glBegin(GL_QUADS);
-			glNormal3f(0, 0, -1);
-			glTexCoord2f(-5., -5.);
-			glVertex3f(-1, -1, 0);
-			glTexCoord2f(-5., 5.);
-			glVertex3f(-1, 1, 0);
-			glTexCoord2f(5., 5.);
-			glVertex3f(1, 1, 0);
-			glTexCoord2f(5., -5.);
-			glVertex3f(1, -1, 0);
-		glEnd();
+		glTranslatef(0, 0, 10);
+		glRotatef(-90, 1, 0, 0);
+		ezsquare(20, 20);
 	glPopMatrix();
 
 	glutSwapBuffers();
 	glFlush();
 	glutPostRedisplay();
-	//glDisable(GL_TEXTURE_2D);
 }
 
 void reshape(int w, int h){
@@ -355,7 +344,6 @@ void keyboard(unsigned char key, int x, int y){
 			distance += -.5;
 			break;
 		case 27:
-			//exit(0);
 			glutLeaveMainLoop();
 			break;
 	}
