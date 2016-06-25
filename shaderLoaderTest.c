@@ -153,13 +153,13 @@ void display(){
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light0Amb);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light0Diff);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light0Spec);
-	GLfloat light0Pos[] = {-100.0*0, 100.0, 100.0, 1.0};
+	GLfloat light0Pos[] = {0, 100.0, 100.0, 1.0};
 	glLightfv(GL_LIGHT0, GL_POSITION, light0Pos);
 	glEnable(GL_LIGHT0);
 	// Light 1: lamp
 	GLfloat light1Amb[] = {0, 0, 0};
-	GLfloat light1Diff[] = {1, .22, .05};
-	GLfloat light1Spec[] = {0, 0, 0};
+	GLfloat light1Diff[] = {0, 0, 0};//{1, .22, .05};
+	GLfloat light1Spec[] = {0, 0, 0};//{1, .22, .05};
 	glLightfv(GL_LIGHT1, GL_AMBIENT, light1Amb);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
