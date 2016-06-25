@@ -163,7 +163,7 @@ void display(){
 	glLightfv(GL_LIGHT1, GL_AMBIENT, light1Amb);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
-	GLfloat light1Pos[] = {0.0, 9.0, 1.0, 1.0};
+	GLfloat light1Pos[] = {0.0, 12.0, 1.0, 1.0};
 	glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
 	glEnable(GL_LIGHT1);
 
