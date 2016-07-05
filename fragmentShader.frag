@@ -28,12 +28,12 @@ void main(void)
 		ashDiffuse		*= 28.0/(23.0*pi) * (1 - pow((1 - dot(n, e)/2.0), 5)) * (1 - pow(1 - dot(n, l)/2.0, 5));
 
 		// Ashikhmin specular
-		int nu				= 100;
-		int nv				= 100;
+		int nu				= 10;
+		int nv				= 1000;
 		vec3 hu 			= normalize(dot(h, u)*u);
 		vec3 hv				= normalize(dot(h, v)*v);
 		float ashSpecNorm 	= sqrt((nu+1)*(nv+1))/(8*pi);
-		float ashSpecExp 	= nu;//(nu*pow(dot(h,u), 2) + nv*pow(dot(h,v), 2))/(1 - pow(dot(h,n), 2));
+		float ashSpecExp 	= (nu*pow(dot(h,u), 2) + nv*pow(dot(h,v), 2))/(1 - pow(dot(h,n), 2));
 		float ashSpecDenom 	= dot(h,l)*max(dot(n,l), dot(n,e));
 		vec4 ashSpecFres	= vec4(gl_FrontMaterial.specular.rgb + (vec3(1.0) - gl_FrontMaterial.specular.rgb)*pow(1 - dot(l, h), 5), 1);
 		vec4 ashSpecular	= ashSpecNorm * pow(max(dot(n, h), 0), ashSpecExp) * ashSpecFres / ashSpecDenom;
@@ -41,6 +41,7 @@ void main(void)
 		totalColor		+= clamp(ambient*0 + ashDiffuse + ashSpecular, 0, 1) * fragColor;
 	}
 
+	//totalColor = vec4(v, 1);
 	FragColor = totalColor;
 }
 // end shader

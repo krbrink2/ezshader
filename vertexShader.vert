@@ -30,6 +30,17 @@ void main()
 		u 			= mat3(gl_ModelViewMatrix) * u;
 	}
 
+	if(gl_Normal == vec3(0, 1, 0)){
+		u = vec3(-1.0, 0.0, 0.0);
+		v = vec3(0.0, 0.0, -1.0);
+	}
+	else{
+		v = normalize(cross(gl_Normal, vec3(0, 1, 0)));
+		u = normalize(cross(v, gl_Normal));
+		v = mat3(gl_ModelViewMatrix) * v;
+		u = mat3(gl_ModelViewMatrix) * u;
+	}
+
 	gl_Position = gl_ModelViewProjectionMatrix*gl_Vertex;
 }
 // End
