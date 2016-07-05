@@ -172,8 +172,8 @@ void display(){
 	// @TODO: disable texturing
 	// Set material
 	GLfloat matAmb[] = {.2, .2, .2, 1.f};
-	GLfloat matDiff[] = {.6, .6, .6, 1.f};
-	GLfloat matSpec[] = {1.f, 1.f, 1.f, 1.f};
+	GLfloat matDiff[] = {1, 1, 1, 1.f};
+	GLfloat matSpec[] = {.1, .1, .1, 1.f};
 	glMaterialfv(GL_FRONT, GL_AMBIENT, matAmb);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, matDiff);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, matSpec);
@@ -279,8 +279,8 @@ void display(){
 
 	// Wall
 	GLfloat wallMatAmb[] = {.05, .05, .05, 1.f};
-	GLfloat wallMatDiff[] = {.5, .5, .5, 1.f};
-	GLfloat wallMatSpec[] = {.4, .4, .4, 1.f};
+	GLfloat wallMatDiff[] = {1, 1, 1, 1.f};
+	GLfloat wallMatSpec[] = {.01, .01, .01, 1.f};
 	glMaterialfv(GL_FRONT, GL_AMBIENT, wallMatAmb);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, wallMatDiff);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, wallMatSpec);
