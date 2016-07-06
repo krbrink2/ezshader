@@ -19,27 +19,25 @@ void main()
 	// vec3 b 		= normalize(vec3(1, 1, -1));
 	// vec3 v 		= normalize(b - dot(b, n)*n);
 	v			= cross(perturbedNormal, vec3(0, 1, 0));
-	if(length(v) < .0){
-		u = vec3(0., 0., -1.);
-		v = vec3(-1., 0., 0.);
-	}
-	else{
-		v 			= normalize(v);
-		u			= normalize(cross(v, perturbedNormal));
-		v 			= mat3(gl_ModelViewMatrix) * v;
-		u 			= mat3(gl_ModelViewMatrix) * u;
-	}
+	v 			= normalize(v);
+	u			= normalize(cross(v, perturbedNormal));
+	v 			= mat3(gl_ModelViewMatrix) * v;
+	u 			= mat3(gl_ModelViewMatrix) * u;
+	u			= normalize(u);
+	v 			= normalize(v);
 
-	if(gl_Normal == vec3(0, 1, 0)){
+	if(gl_Normal == vec3(0.0, 1.0, 0.0)){
 		u = vec3(-1.0, 0.0, 0.0);
 		v = vec3(0.0, 0.0, -1.0);
 	}
 	else{
 		v = normalize(cross(gl_Normal, vec3(0, 1, 0)));
 		u = normalize(cross(v, gl_Normal));
-		v = mat3(gl_ModelViewMatrix) * v;
-		u = mat3(gl_ModelViewMatrix) * u;
 	}
+	v = mat3(gl_ModelViewMatrix) * v;
+	u = mat3(gl_ModelViewMatrix) * u;
+	u			= normalize(u);
+	v 			= normalize(v);
 
 	gl_Position = gl_ModelViewProjectionMatrix*gl_Vertex;
 }

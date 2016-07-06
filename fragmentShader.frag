@@ -28,8 +28,8 @@ void main(void)
 		ashDiffuse		*= 28.0/(23.0*pi) * (1 - pow((1 - dot(n, e)/2.0), 5)) * (1 - pow(1 - dot(n, l)/2.0, 5));
 
 		// Ashikhmin specular
-		int nu				= 10;
-		int nv				= 1000;
+		int nu				= 1000;
+		int nv				= 10;
 		vec3 hu 			= normalize(dot(h, u)*u);
 		vec3 hv				= normalize(dot(h, v)*v);
 		float ashSpecNorm 	= sqrt((nu+1)*(nv+1))/(8*pi);
