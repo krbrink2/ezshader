@@ -13,6 +13,7 @@ void main(void)
 	vec4 totalColor = vec4(0, 0, 0, 1);
 
 	for(int i = 0; i < 1; i++){
+		i = 1;
 		// Unit vectors
 		vec3 l	= normalize(gl_LightSource[i].position.xyz - modelCoord.xyz);
 		vec3 e	= normalize(-modelCoord.xyz);
@@ -28,8 +29,8 @@ void main(void)
 		ashDiffuse		*= 28.0/(23.0*pi) * (1 - pow((1 - dot(n, e)/2.0), 5)) * (1 - pow(1 - dot(n, l)/2.0, 5));
 
 		// Ashikhmin specular
-		int nu				= 1000;
-		int nv				= 10;
+		int nu				= 100;
+		int nv				= 100;
 		vec3 hu 			= normalize(dot(h, u)*u);
 		vec3 hv				= normalize(dot(h, v)*v);
 		float ashSpecNorm 	= sqrt((nu+1)*(nv+1))/(8*pi);

@@ -155,7 +155,7 @@ void display(){
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light0Spec);
 	GLfloat light0Pos[] = {0, 100.0, 100.0, 0.0};
 	glLightfv(GL_LIGHT0, GL_POSITION, light0Pos);
-	glEnable(GL_LIGHT0);
+	glDisable(GL_LIGHT0);
 	// Light 1: lamp
 	GLfloat light1Amb[] = {0, 0, 0};
 	GLfloat light1Diff[] = {0, 0, 0};//{1, .22, .05};
