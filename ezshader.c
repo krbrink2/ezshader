@@ -6,7 +6,7 @@
 
 GLuint vshader, fshader, program;
 
-// Returns 0 on success
+// Returns program id on success, or -1 on failure
 int ezMakeShader(FILE *vf, FILE *ff){
 	GLint compiled, linked;
 	// Load vertex shader
@@ -39,7 +39,7 @@ int ezMakeShader(FILE *vf, FILE *ff){
 
 	vshader = glCreateShader(GL_VERTEX_SHADER);					// Create shader object
 	fshader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(vshader, 1, &vShaderSrc_const, NULL);					// Attach source code
+	glShaderSource(vshader, 1, &vShaderSrc_const, NULL);		// Attach source code
 	glShaderSource(fshader, 1, &fShaderSrc_const, NULL);
 	glCompileShader(vshader);									// Compile
 	glGetShaderiv(vshader, GL_COMPILE_STATUS, &compiled );		// Check if compilation successful
@@ -66,6 +66,10 @@ int ezMakeShader(FILE *vf, FILE *ff){
 		return -1;
 	}
 	program = glCreateProgram();								// Create program object
+	if(!program){
+		printf("~~ Failed to create program!\n");
+		return -1;
+	}
 	glAttachShader(program, vshader);							// Attatch shader
 	glAttachShader(program, fshader);
 	glLinkProgram(program);										// Link all shaders
@@ -84,17 +88,5 @@ int ezMakeShader(FILE *vf, FILE *ff){
 		return -1;
 	}
 
-	// Uniforms
-	GLint fooloc = glGetUniformLocation(program, "foo");
-	GLint barloc = glGetUniformLocation(program, "bar");
-	if (fooloc != -1)
-	{
-   		glUniform1f(fooloc, 0.1);
-	}
-	if (barloc != -1)
-	{
-   		glUniform1f(barloc, 1.0);
-	}
-
-	return 0;
+	return program;
 }

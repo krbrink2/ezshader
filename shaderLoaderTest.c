@@ -10,6 +10,7 @@
 #include "ezshader.h"
 
 // Globals
+GLint program;
 GLint callListIndices[8];
 static GLuint texNames[8];
 GLfloat angle;
@@ -127,12 +128,25 @@ void init(){
 		printf("Can't open file!\n");
 		exit(1);
 	}
-	if(ezMakeShader(vf, ff)){
+	program = ezMakeShader(vf, ff);
+	if(-1 == program){
 		printf("Error loading shader!\n");
 		exit(1);
 	}
 	fclose(vf);
 	fclose(ff);
+
+	// Uniforms
+	GLint fooloc = glGetUniformLocation(program, "foo");
+	GLint barloc = glGetUniformLocation(program, "bar");
+	if (fooloc != -1)
+	{
+   		glUniform1f(fooloc, 1.0);
+	}
+	if (barloc != -1)
+	{
+   		glUniform1f(barloc, 1.0);
+	}
 
 	distance = 20;
 	elevation = 9;
