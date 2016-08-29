@@ -8,13 +8,14 @@ out vec4 FragColor;
 uniform sampler2D texture;
 uniform float foo;
 uniform float bar;
+uniform int numLights;
 void main(void)
 {
 	float pi = 3.14159;
 	vec4 fragColor = texture2D(texture, texCoord);	
 	vec4 totalColor = vec4(0, 0, 0, 1);
 
-	for(int i = 1; i <= 1; i++){
+	for(int i = 0; i < numLights; i++){
 		// Unit vectors
 		vec3 l	= normalize(gl_LightSource[i].position.xyz - modelCoord.xyz);
 		vec3 e	= normalize(-modelCoord.xyz);
@@ -44,6 +45,6 @@ void main(void)
 	}
 
 	//totalColor = vec4(v, 1);
-	FragColor = vec4(bar, bar, foo, 1);//totalColor;
+	FragColor = totalColor;
 }
 // end shader

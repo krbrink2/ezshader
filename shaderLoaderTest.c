@@ -136,18 +136,6 @@ void init(){
 	fclose(vf);
 	fclose(ff);
 
-	// Uniforms
-	GLint fooloc = glGetUniformLocation(program, "foo");
-	GLint barloc = glGetUniformLocation(program, "bar");
-	if (fooloc != -1)
-	{
-   		glUniform1f(fooloc, 1.0);
-	}
-	if (barloc != -1)
-	{
-   		glUniform1f(barloc, 1.0);
-	}
-
 	distance = 20;
 	elevation = 9;
 }
@@ -161,9 +149,10 @@ void display(){
 
 	// Lights
 	// Light 0: distance
-	GLfloat light0Amb[] = {1.0, 1.0, 1.0};
-	GLfloat light0Diff[] = {1.0, 1.0, 1.0};
-	GLfloat light0Spec[] = {1.0, 1.0, 1.0};
+	GLfloat light0Intensity = .5;
+	GLfloat light0Amb[] = {light0Intensity, light0Intensity, light0Intensity};
+	GLfloat light0Diff[] = {light0Intensity, light0Intensity, light0Intensity};
+	GLfloat light0Spec[] = {light0Intensity, light0Intensity, light0Intensity};
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light0Amb);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light0Diff);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light0Spec);
@@ -180,6 +169,20 @@ void display(){
 	GLfloat light1Pos[] = {0.0, 12.0, 1.0, 1.0};
 	glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
 	glEnable(GL_LIGHT1);
+
+	GLint numLights = 2;
+
+	// Uniforms
+	GLint fooLoc = glGetUniformLocation(program, "foo");
+	if (fooLoc != -1)
+   		glUniform1f(fooLoc, 1.0);
+   	GLint barLoc = glGetUniformLocation(program, "bar");
+	if (barLoc != -1)
+   		glUniform1f(barLoc, 1.0);
+   	GLint numLightsLoc = glGetUniformLocation(program, "numLights");
+   	if (numLightsLoc != -1)
+   		glUniform1i(numLightsLoc, numLights);
+
 
 	// Draw objects
 	// Teapot
