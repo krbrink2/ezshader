@@ -158,8 +158,8 @@ void display(){
 	glDisable(GL_LIGHT0);
 	// Light 1: lamp
 	GLfloat light1Amb[] = {0, 0, 0};
-	GLfloat light1Diff[] = {0, 0, 0};//{1, .22, .05};
-	GLfloat light1Spec[] = {0, 0, 0};//{1, .22, .05};
+	GLfloat light1Diff[] = {1, .22, .05};
+	GLfloat light1Spec[] = {1, .22, .05};
 	glLightfv(GL_LIGHT1, GL_AMBIENT, light1Amb);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
