@@ -6,6 +6,8 @@ in vec3 u;
 in vec3 v;
 out vec4 FragColor;
 uniform sampler2D texture;
+uniform float foo;
+uniform float bar;
 void main(void)
 {
 	float pi = 3.14159;
@@ -42,6 +44,6 @@ void main(void)
 	}
 
 	//totalColor = vec4(v, 1);
-	FragColor = totalColor;
+	FragColor = vec4(bar, bar, foo, 1);//totalColor;
 }
 // end shader

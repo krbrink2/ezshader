@@ -83,5 +83,18 @@ int ezMakeShader(FILE *vf, FILE *ff){
 		free(log);
 		return -1;
 	}
+
+	// Uniforms
+	GLint fooloc = glGetUniformLocation(program, "foo");
+	GLint barloc = glGetUniformLocation(program, "bar");
+	if (fooloc != -1)
+	{
+   		glUniform1f(fooloc, 0.1);
+	}
+	if (barloc != -1)
+	{
+   		glUniform1f(barloc, 1.0);
+	}
+
 	return 0;
 }
