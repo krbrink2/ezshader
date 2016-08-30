@@ -122,8 +122,8 @@ void init(){
 
 	// Create shader
 	FILE *vf, *ff;
-	vf = fopen("vertexShader.vert", "r");
-	ff = fopen("fragmentShader.frag", "r");
+	vf = fopen("simpleVertexShader.vert", "r");
+	ff = fopen("disney.brdf", "r");
 	if(!vf || !ff){
 		printf("Can't open file!\n");
 		exit(1);
@@ -173,16 +173,19 @@ void display(){
 	GLint numLights = 2;
 
 	// Uniforms
-	GLint fooLoc = glGetUniformLocation(program, "foo");
-	if (fooLoc != -1)
-   		glUniform1f(fooLoc, 1.0);
-   	GLint barLoc = glGetUniformLocation(program, "bar");
-	if (barLoc != -1)
-   		glUniform1f(barLoc, 1.0);
    	GLint numLightsLoc = glGetUniformLocation(program, "numLights");
    	if (numLightsLoc != -1)
    		glUniform1i(numLightsLoc, numLights);
-   	glUniform1f(glGetUniformLocation(program, "baseColor"), ???);//@RESUME
+   	glUniform1f(glGetUniformLocation(program, "metallic"), .2);
+   	glUniform1f(glGetUniformLocation(program, "subsurface"), 0);
+   	glUniform1f(glGetUniformLocation(program, "specular"), .2);
+   	glUniform1f(glGetUniformLocation(program, "roughness"), .2);
+   	glUniform1f(glGetUniformLocation(program, "specularTint"), 0);
+   	glUniform1f(glGetUniformLocation(program, "anisotropic"), 0);
+   	glUniform1f(glGetUniformLocation(program, "sheen"), 0);
+   	glUniform1f(glGetUniformLocation(program, "sheenTint"), 0);
+   	glUniform1f(glGetUniformLocation(program, "clearcoat"), 0);
+   	glUniform1f(glGetUniformLocation(program, "clearcoatGloss"), 0);
 
 
 	// Draw objects
