@@ -182,6 +182,7 @@ void display(){
    	GLint numLightsLoc = glGetUniformLocation(program, "numLights");
    	if (numLightsLoc != -1)
    		glUniform1i(numLightsLoc, numLights);
+   	glUniform1f(glGetUniformLocation(program, "baseColor"), ???);//@RESUME
 
 
 	// Draw objects
