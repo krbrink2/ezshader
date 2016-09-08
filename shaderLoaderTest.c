@@ -170,22 +170,64 @@ void display(){
 	glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
 	glEnable(GL_LIGHT1);
 
-	GLint numLights = 2;
+	GLint numLights = 1;
 
 	// Uniforms
-   	GLint numLightsLoc = glGetUniformLocation(program, "numLights");
-   	if (numLightsLoc != -1)
-   		glUniform1i(numLightsLoc, numLights);
-   	glUniform1f(glGetUniformLocation(program, "metallic"), .2);
-   	glUniform1f(glGetUniformLocation(program, "subsurface"), 0);
-   	glUniform1f(glGetUniformLocation(program, "specular"), .2);
-   	glUniform1f(glGetUniformLocation(program, "roughness"), .2);
-   	glUniform1f(glGetUniformLocation(program, "specularTint"), 0);
-   	glUniform1f(glGetUniformLocation(program, "anisotropic"), 0);
-   	glUniform1f(glGetUniformLocation(program, "sheen"), 0);
-   	glUniform1f(glGetUniformLocation(program, "sheenTint"), 0);
-   	glUniform1f(glGetUniformLocation(program, "clearcoat"), 0);
-   	glUniform1f(glGetUniformLocation(program, "clearcoatGloss"), 0);
+   	GLint uniloc = glGetUniformLocation(program, "numLights");
+   	if (uniloc != -1)
+   		glUniform1i(uniloc, numLights);
+   	else
+   		printf("~~Error setting uniform0!\n");
+   	uniloc = glGetUniformLocation(program, "metallic");
+   	if (uniloc != -1)
+   		glUniform1f(uniloc, .0);
+   	else
+   		printf("~~Error setting uniform1!\n");
+   	uniloc = glGetUniformLocation(program, "subsurface");
+   	if (uniloc != -1)
+   		glUniform1f(uniloc, 0);
+   	else
+   		printf("~~Error setting uniform!2\n");
+   	uniloc = glGetUniformLocation(program, "specular");
+   	if (uniloc != -1)
+   		glUniform1f(uniloc, 0);
+   	else
+   		printf("~~Error setting uniform!3\n");
+   	uniloc = glGetUniformLocation(program, "roughness");
+   	if (uniloc != -1)
+   		glUniform1f(uniloc, 0);
+   	else
+   		printf("~~Error setting uniform!4\n");
+   	uniloc = glGetUniformLocation(program, "specularTint");
+   	if (uniloc != -1)
+   		glUniform1f(uniloc, 0);
+   	else
+   		printf("~~Error setting uniform!5\n");
+   	uniloc = glGetUniformLocation(program, "anisotropic");
+   	if (uniloc != -1)
+   		glUniform1f(uniloc, 0);
+   	else
+   		printf("~~Error setting uniform!6\n");
+   	uniloc = glGetUniformLocation(program, "sheen");
+   	if (uniloc != -1)
+   		glUniform1f(uniloc, 0);
+   	else
+   		printf("~~Error setting uniform!7\n");
+   	uniloc = glGetUniformLocation(program, "sheenTint");
+   	if (uniloc != -1)
+   		glUniform1f(uniloc, 0);
+   	else
+   		printf("~~Error setting uniform!8\n");
+   	uniloc = glGetUniformLocation(program, "clearcoat");
+   	if (uniloc != -1)
+   		glUniform1f(uniloc, 0);
+   	else
+   		printf("~~Error setting uniform!9\n");
+    uniloc = glGetUniformLocation(program, "clearcoatGloss");
+    if (uniloc != -1)
+   		glUniform1f(uniloc, 0);
+   	else
+   		printf("~~Error setting uniform!10\n");
 
 
 	// Draw objects
@@ -377,8 +419,8 @@ void mouse(int button, int state, int x, int y){
 int main(int argc, char* argv[]){
 	glutInit(&argc, (char**)argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowSize(1000, 800);
-	glutInitWindowPosition(100, 100);
+	glutInitWindowSize(1800, 1000);
+	glutInitWindowPosition(1900, 0);
 	glutCreateWindow(argv[0]);
 	glewInit();
 	init();
