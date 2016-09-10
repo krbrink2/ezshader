@@ -173,62 +173,17 @@ void display(){
 	GLint numLights = 1;
 
 	// Uniforms
-   	GLint uniloc = glGetUniformLocation(program, "numLights");
-   	if (uniloc != -1)
-   		glUniform1i(uniloc, numLights);
-   	else
-   		printf("~~Error setting uniform0!\n");
-   	uniloc = glGetUniformLocation(program, "metallic");
-   	if (uniloc != -1)
-   		glUniform1f(uniloc, .0);
-   	else
-   		printf("~~Error setting uniform1!\n");
-   	uniloc = glGetUniformLocation(program, "subsurface");
-   	if (uniloc != -1)
-   		glUniform1f(uniloc, 0);
-   	else
-   		printf("~~Error setting uniform!2\n");
-   	uniloc = glGetUniformLocation(program, "specular");
-   	if (uniloc != -1)
-   		glUniform1f(uniloc, 0);
-   	else
-   		printf("~~Error setting uniform!3\n");
-   	uniloc = glGetUniformLocation(program, "roughness");
-   	if (uniloc != -1)
-   		glUniform1f(uniloc, 0);
-   	else
-   		printf("~~Error setting uniform!4\n");
-   	uniloc = glGetUniformLocation(program, "specularTint");
-   	if (uniloc != -1)
-   		glUniform1f(uniloc, 0);
-   	else
-   		printf("~~Error setting uniform!5\n");
-   	uniloc = glGetUniformLocation(program, "anisotropic");
-   	if (uniloc != -1)
-   		glUniform1f(uniloc, 0);
-   	else
-   		printf("~~Error setting uniform!6\n");
-   	uniloc = glGetUniformLocation(program, "sheen");
-   	if (uniloc != -1)
-   		glUniform1f(uniloc, 0);
-   	else
-   		printf("~~Error setting uniform!7\n");
-   	uniloc = glGetUniformLocation(program, "sheenTint");
-   	if (uniloc != -1)
-   		glUniform1f(uniloc, 0);
-   	else
-   		printf("~~Error setting uniform!8\n");
-   	uniloc = glGetUniformLocation(program, "clearcoat");
-   	if (uniloc != -1)
-   		glUniform1f(uniloc, 0);
-   	else
-   		printf("~~Error setting uniform!9\n");
-    uniloc = glGetUniformLocation(program, "clearcoatGloss");
-    if (uniloc != -1)
-   		glUniform1f(uniloc, 0);
-   	else
-   		printf("~~Error setting uniform!10\n");
-
+   	ezUniformi(program, "numLights", numLights);
+   	ezUniformf(program, "metallic", .2);
+   	ezUniformf(program, "subsurface", 0);
+   	ezUniformf(program, "specular", 0);
+   	ezUniformf(program, "roughness", 0);
+   	ezUniformf(program, "specularTint", 0);
+   	ezUniformf(program, "anisotropic", 0);
+   	ezUniformf(program, "sheen", 0);
+   	ezUniformf(program, "sheenTint", 0);
+   	ezUniformf(program, "clearcoat", 0);
+   	ezUniformf(program, "clearcoatGloss", 0);
 
 	// Draw objects
 	// Teapot

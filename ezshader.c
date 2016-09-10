@@ -1,10 +1,42 @@
+#define VERBOSE_DEBUG 1
+
 #include "ezshader.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <GL/glew.h>
 #include <GL/gl.h>
 
-GLuint vshader, fshader, program;
+GLuint vshader, fshader, program;	//@TODO: should this not be a global?
+
+// Sets uniform value. Retuns 0 on success.
+// TODO: consider templates or operator overloading
+int ezUniformi(GLint program, char* name, GLint value){
+	GLint loc = glGetUniformLocation(program, name);
+   	if (loc != -1)
+   		glUniform1i(loc, value);
+   	else{
+   		#ifdef VERBOSE_DEBUG
+   		printf("~~Error setting uniform \"%s\"!\n", name);
+   		#endif
+   		return -1;
+   	}
+   	return 0;
+}
+
+// Sets uniform value. Retuns 0 on success.
+// TODO: consider templates or operator overloading
+int ezUniformf(GLint program, char* name, GLfloat value){
+	GLint loc = glGetUniformLocation(program, name);
+   	if (loc != -1)
+   		glUniform1f(loc, value);
+   	else{
+   		#ifdef VERBOSE_DEBUG
+   		printf("~~Error setting uniform \"%s\"!\n", name);
+   		#endif
+   		return -1;
+   	}
+   	return 0;
+}
 
 // Returns program id on success, or -1 on failure
 int ezMakeShader(FILE *vf, FILE *ff){
