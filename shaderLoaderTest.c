@@ -176,9 +176,9 @@ void display(){
    	ezUniformi(program, "numLights", numLights);
    	ezUniformf(program, "metallic", .2);
    	ezUniformf(program, "subsurface", 0);
-   	ezUniformf(program, "specular", 0);
+   	ezUniformf(program, "specular", 1);
    	ezUniformf(program, "roughness", 0);
-   	ezUniformf(program, "specularTint", 0);
+   	ezUniformf(program, "specularTint", 1);
    	ezUniformf(program, "anisotropic", 0);
    	ezUniformf(program, "sheen", 0);
    	ezUniformf(program, "sheenTint", 0);
