@@ -9,6 +9,7 @@
 // 	None
 
 // function declarations
+void ezGetError();
 int ezUniformf(GLint program, char* name, GLfloat value);
 int ezUniformi(GLint program, char* name, GLint value);
 int ezMakeShader(FILE *vf, FILE *ff);

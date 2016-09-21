@@ -123,7 +123,7 @@ void init(){
 	// Create shader
 	FILE *vf, *ff;
 	vf = fopen("simpleVertexShader.vert", "r");
-	ff = fopen("disney.brdf", "r");
+	ff = fopen("isoAshikhmin.frag", "r");
 	if(!vf || !ff){
 		printf("Can't open file!\n");
 		exit(1);
@@ -149,8 +149,8 @@ void display(){
 
 	// Lights
 	// Light 0: distance
-	GLfloat light0Intensity = .5;
-	GLfloat light0Amb[] = {light0Intensity, light0Intensity, light0Intensity};
+	GLfloat light0Intensity = 0;
+	GLfloat light0Amb[] = {0, 0, 0};
 	GLfloat light0Diff[] = {light0Intensity, light0Intensity, light0Intensity};
 	GLfloat light0Spec[] = {light0Intensity, light0Intensity, light0Intensity};
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light0Amb);
@@ -170,20 +170,25 @@ void display(){
 	glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
 	glEnable(GL_LIGHT1);
 
-	GLint numLights = 1;
+	GLint numLights = 2;
 
 	// Uniforms
    	ezUniformi(program, "numLights", numLights);
-   	ezUniformf(program, "metallic", .2);
-   	ezUniformf(program, "subsurface", 0);
-   	ezUniformf(program, "specular", 1);
-   	ezUniformf(program, "roughness", 0);
-   	ezUniformf(program, "specularTint", 1);
-   	ezUniformf(program, "anisotropic", 0);
-   	ezUniformf(program, "sheen", 0);
-   	ezUniformf(program, "sheenTint", 0);
-   	ezUniformf(program, "clearcoat", 0);
-   	ezUniformf(program, "clearcoatGloss", 0);
+   	// ezUniformf(program, "metallic", 1);
+   	// ezUniformf(program, "subsurface", 0);
+   	// ezUniformf(program, "specular", 1);
+   	// ezUniformf(program, "roughness", 0);
+   	// ezUniformf(program, "specularTint", 1);
+   	// ezUniformf(program, "anisotropic", 0);
+   	// ezUniformf(program, "sheen", 0);
+   	// ezUniformf(program, "sheenTint", 0);
+   	// ezUniformf(program, "clearcoat", 0);
+   	// ezUniformf(program, "clearcoatGloss", 0);
+   	ezUniformi(program, "expn", 10);
+   	ezUniformf(program, "D", .7);
+   	//ezGetError();
+   	ezUniformf(program, "S", .5);
+   	//ezGetError();
 
 	// Draw objects
 	// Teapot

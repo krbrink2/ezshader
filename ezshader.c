@@ -8,6 +8,22 @@
 
 GLuint vshader, fshader, program;	//@TODO: should this not be a global?
 
+void ezGetError(){
+	switch(glGetError()){
+		case GL_NO_ERROR:
+			printf("~~No error\n");
+			break;
+		case GL_INVALID_VALUE:
+			printf("~~Invalid value\n");
+			break;
+		case GL_INVALID_OPERATION:
+			printf("~~Invalid Operation\n");
+			break;
+		default:
+			printf("~~Unknown error");
+	}
+}
+
 // Sets uniform value. Retuns 0 on success.
 // TODO: consider templates or operator overloading
 int ezUniformi(GLint program, char* name, GLint value){
