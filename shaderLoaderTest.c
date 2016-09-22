@@ -149,8 +149,8 @@ void display(){
 
 	// Lights
 	// Light 0: distance
-	GLfloat light0Intensity = 0;
-	GLfloat light0Amb[] = {0, 0, 0};
+	GLfloat light0Intensity = 1;
+	GLfloat light0Amb[] = {.05, .05, .05};
 	GLfloat light0Diff[] = {light0Intensity, light0Intensity, light0Intensity};
 	GLfloat light0Spec[] = {light0Intensity, light0Intensity, light0Intensity};
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light0Amb);
@@ -158,11 +158,12 @@ void display(){
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light0Spec);
 	GLfloat light0Pos[] = {0, 100.0, 100.0, 0.0};
 	glLightfv(GL_LIGHT0, GL_POSITION, light0Pos);
-	glDisable(GL_LIGHT0);
+	glEnable(GL_LIGHT0);
 	// Light 1: lamp
 	GLfloat light1Amb[] = {0, 0, 0};
-	GLfloat light1Diff[] = {1, .22, .05};
-	GLfloat light1Spec[] = {1, .22, .05};
+	GLfloat diffDiv		= 1;
+	GLfloat light1Diff[] = {1/diffDiv, .22/diffDiv, .05/diffDiv};
+	GLfloat light1Spec[] = {1/diffDiv, .22/diffDiv, .05/diffDiv};
 	glLightfv(GL_LIGHT1, GL_AMBIENT, light1Amb);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
@@ -184,10 +185,10 @@ void display(){
    	// ezUniformf(program, "sheenTint", 0);
    	// ezUniformf(program, "clearcoat", 0);
    	// ezUniformf(program, "clearcoatGloss", 0);
-   	ezUniformi(program, "expn", 10);
-   	ezUniformf(program, "D", .7);
+   	ezUniformi(program, "expn", 100);
+   	ezUniformf(program, "D", 1);
    	//ezGetError();
-   	ezUniformf(program, "S", .5);
+   	ezUniformf(program, "S", 1);
    	//ezGetError();
 
 	// Draw objects
@@ -201,6 +202,9 @@ void display(){
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, matDiff);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, matSpec);
 	glMaterialf(GL_FRONT, GL_SHININESS, 50);
+	ezUniformi(program, "expn", 10);
+   	ezUniformf(program, "D", 1);
+   	ezUniformf(program, "S", .3);
 	// Texturing
 	//glActiveTexture(GL_TEXTURE2);
 	// Note: ActiveTexture only breaks stuff.
@@ -228,6 +232,9 @@ void display(){
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, matDiff);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, matSpec);
 	glMaterialf(GL_FRONT, GL_SHININESS, 50);
+	ezUniformi(program, "expn", 25);
+   	ezUniformf(program, "D", .8);
+   	ezUniformf(program, "S", .85);
 	// Texturing
 	//glActiveTexture(GL_TEXTURE0);
 	//glEnable(GL_TEXTURE_2D);
@@ -255,6 +262,9 @@ void display(){
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, matDiff);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, matSpec);
 	glMaterialf(GL_FRONT, GL_SHININESS, 50);
+	ezUniformi(program, "expn", 15);
+   	ezUniformf(program, "D", 1);
+   	ezUniformf(program, "S", .15);
 	// Texturing
 	//glActiveTexture(GL_TEXTURE2);
 	// Note: ActiveTexture only breaks stuff.
@@ -283,6 +293,9 @@ void display(){
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, matDiff);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, matSpec);
 	glMaterialf(GL_FRONT, GL_SHININESS, 50);
+	ezUniformi(program, "expn", 15);
+   	ezUniformf(program, "D", 1);
+   	ezUniformf(program, "S", .15);
 	// Texturing
 	//glActiveTexture(GL_TEXTURE0);
 	//glEnable(GL_TEXTURE_2D);
@@ -308,6 +321,9 @@ void display(){
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, wallMatDiff);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, wallMatSpec);
 	glMaterialf(GL_FRONT, GL_SHININESS, 10);
+	ezUniformi(program, "expn", 10);
+   	ezUniformf(program, "D", 1);
+   	ezUniformf(program, "S", .1);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glBindTexture(GL_TEXTURE_2D, texNames[3]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -325,6 +341,9 @@ void display(){
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, floorMatDiff);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, floorMatSpec);
 	glMaterialf(GL_FRONT, GL_SHININESS, 10);
+	ezUniformi(program, "expn", 20);
+   	ezUniformf(program, "D", 1);
+   	ezUniformf(program, "S", .4);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glBindTexture(GL_TEXTURE_2D, texNames[4]);
 	glPushMatrix();
